@@ -1,0 +1,23 @@
+{% extends "store/base.html" %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
+    <div class="product-detail">
+        <h1>{{ product.name }}</h1>
+
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" width="300">
+        {% else %}
+            <p>Нет изображения</p>
+        {% endif %}
+
+        <div class="product-category">{{ product.category.name }}</div>
+        <div class="product-price-detail">${{ product.price }}</div>
+        <p>{{ product.description }}</p>
+
+        <div class="product-actions">
+            <a href="{% url 'product_update' product.pk %}" class="btn">Edit</a>
+            <a href="{% url 'product_delete' product.pk %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'product_list' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+{% endblock %}

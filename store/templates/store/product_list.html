@@ -1,0 +1,38 @@
+{% extends "store/base.html" %}
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Product List</h1>
+    <a href="{% url 'product_create' %}" class="btn btn-primary">Add New Product</a>
+
+    <div class="product-grid">
+        {% for product in products %}
+            <div class="product-card">
+                <div class="product-image-container">
+                    {% if product.image %}
+                        <img class="product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                        <div class="no-image">
+                            <i class="no-image-icon">📷</i>
+                            <span>No Image Available</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="product-content">
+                    <h2 class="product-title"><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></h2>
+                    <span class="product-category">{{ product.category.name }}</span>
+                    <p class="product-price">${{ product.price }}</p>
+                    <div class="product-actions">
+                        <a href="{% url 'product_detail' product.pk %}" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="no-products-message">
+                <p>No products available.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

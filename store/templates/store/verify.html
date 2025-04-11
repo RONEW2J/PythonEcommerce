@@ -1,0 +1,23 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Подтвердите код</h1>
+
+    <div class="form-container confirmation-form">
+        <form method="post" class="styled-form">
+            {% csrf_token %}
+
+            <div class="form-group code-input-group">
+                <label for="code">Code:</label>
+                <input type="text" id="code" name="code" placeholder="Enter verification code" required>
+                <small class="help-text">Please enter the confirmation code sent to your device</small>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success">Подтвердить</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
